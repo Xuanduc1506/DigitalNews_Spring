@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/Header.css}" rel="stylesheet">
+    <!--    <link rel="stylesheet" href="../static/css/Header.css">-->
+</head>
+<body>
+<div class="contentHeader" th:fragment="Header">
+    <div class="preHeader"></div>
+    <div class="header"><h1 style="color: white;padding-left: 65px">My Digital News</h1></div>
+    <div class="menu"><a style="text-decoration: none" th:href="@{/Home}"><h3 style="color: white;padding-left: 65px;padding-top: 5px">News</h3></a>
+    </div>
+</div>
+<div class="mid">
+    <div class="contentMiddle">
+        <div class="news">
+            <h3 th:text="${digitalNews.title}"></h3>
+            <img style="width: 500px" th:src="@{'../img/'+${digitalNews.image} }">
+            <p th:text="${digitalNews.content}"></p>
+            <div class="horizontal"> </div>
+            <div class="author">
+                <p th:text="${digitalNews.author}"></p>
+                <p>|</p>
+                <p th:text="${digitalNews.date}"></p>
+            </div>
+        </div>
+    </div>
+    <div class="vertical"></div>
+    <div class="right">
+        <h3>Digital News</h3>
+        <p th:text="${d.shortContent}"></p>
+        <h3>Search</h3>
+
+        <form class="search" th:action="@{/Search}" method="get">
+            <input type="text" name="search">
+            <input class="searchButton" type="submit" value="GO">
+        </form>
+
+        <h3>Last Articles</h3>
+        <p th:each="digital:${list}">
+            <a style="color: black" th:text="*{digital.title}" th:href="@{'/Detail?id='+*{digital.id}}"></a>
+        </p>
+    </div>
+</div>
+<div class="footer"></div>
+
+
+</body>
+</html>
